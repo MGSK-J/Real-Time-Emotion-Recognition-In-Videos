@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facial Emotion Recognition</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #333; /* Dark background color */
+            color: #fff; /* Light text color */
+            font-family: Arial, sans-serif; /* Font family */
+            text-align: center; /* Center align text */
+        }
+
+        h1 {
+            margin-top: 20px; /* Top margin for h1 */
+        }
+
+        img {
+            margin-top: 20px; /* Top margin for image */
+            display: block; /* Make image a block element */
+            margin-left: auto; /* Center align image horizontally */
+            margin-right: auto; /* Center align image horizontally */
+        }
+
+        button {
+            margin-top: 20px; /* Top margin for buttons */
+            padding: 10px 20px; /* Padding for buttons */
+            background-color: #444; /* Dark background color for buttons */
+            color: #fff; /* Light text color for buttons */
+            border: none; /* Remove button border */
+            cursor: pointer; /* Cursor style on hover */
+        }
+
+        button:hover {
+            background-color: #666; /* Dark background color on hover */
+        }
+
+        input[type="text"] {
+            margin-top: 10px; /* Top margin for input text */
+            padding: 10px; /* Padding for input text */
+            width: 200px; /* Width of input text */
+            border: 1px solid #666; /* Border color for input text */
+            border-radius: 5px; /* Rounded corners for input text */
+        }
+
+        progress {
+            margin-top: 20px; /* Top margin for progress bar */
+            width: 60%; /* Width of progress bar */
+        }
+
+        #average-emotion {
+            margin-top: 20px; /* Top margin for average emotion div */
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Facial Emotion Recognition</h1>
+    <div>
+        <img src="{{ url_for('video_feed') }}" width="640" height="480">
+    </div>
+    <button id="analyze-btn">Start Analyze</button>
+    <br>
+    <progress id="progress-bar" value="0" max="100"></progress>
+    <div id="average-emotion"></div>
+    <br>
+    <button id="analyze-again-btn">Restart Analyze</button>
+    <br><br>
+    <hr>
+    <label for="customer-name">Enter Your Name:</label>
+    <input type="text" id="customer-name">
+    <button id="save-stat-btn">Save Stat</button>
+
+    <script>
+        $(document).ready(function() {
+            $("#analyze-btn").click(function() {
+                var progressBar = $("#progress-bar");
+                progressBar.val(0);
+                var interval = setInterval(function() {
+                    var currentValue = progressBar.val();
+                    if (currentValue < 100) {
+                        progressBar.val(currentValue + 10);
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 1000); // Update the progress bar every second
+
+                $.get('/analyze_emotion', function(data, status) {
+                    $("#average-emotion").text("Average Emotion: " + data.avg_emotion);
+                    console.log("Emotion Data:", data.emotion_data);
+                    clearInterval(interval);
+                    progressBar.val(0);
+                });
+            });
+
+            $("#save-stat-btn").click(function() {
+                var customerName = $("#customer-name").val();
+                var avgEmotion = $("#average-emotion").text().split(": ")[1];
+                $.post('/save_stat', { customer_name: customerName, avg_emotion: avgEmotion }, function(data, status) {
+                    alert("Stat saved successfully!");
+                });
+            });
+
+            $("#analyze-again-btn").click(function() {
+                location.reload();
+            });
+        });
+    </script>
+</body>
+</html>

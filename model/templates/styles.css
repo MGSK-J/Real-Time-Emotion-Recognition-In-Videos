@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.image-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#video-feed {
+    width: 640px;
+    height: 480px;
+}
+
+.button-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#analyze-btn, #save-stat-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#analyze-btn:hover, #save-stat-btn:hover {
+    background-color: #0056b3;
+}
+
+#progress-bar {
+    width: 100%;
+    height: 20px;
+}
+
+#average-emotion {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-container {
+    text-align: center;
+}
+
+.form-container label {
+    font-weight: bold;
+}
+
+.form-container input[type="text"] {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.form-container input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.alert-container {
+    text-align: center;
+    color: #28a745; /* Green color for success message */
+    margin-bottom: 20px;
+}

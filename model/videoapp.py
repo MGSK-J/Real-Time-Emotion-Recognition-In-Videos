@@ -16,12 +16,12 @@ def custom_f1_score(y_true, y_pred):
     return f1_val
 
 # Load the saved model
-loaded_model = load_model("model.h5", custom_objects={'custom_f1_score': custom_f1_score})
+loaded_model = load_model("model.h5", custom_objects={'customized_f1_score': custom_f1_score})
 
 # Define the list of classes
 classes = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
-# Load the face cascade
+# Load the face cascade to get the cascade by capturing the face
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 # Open the webcam
@@ -65,5 +65,8 @@ while True:
         break
 
 # Release the webcam and close all windows
+
 cap.release()
 cv2.destroyAllWindows()
+
+# simple demonstration of opening video cam and output string

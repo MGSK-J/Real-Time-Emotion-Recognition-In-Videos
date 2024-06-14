@@ -17,7 +17,7 @@ def custom_f1_score(y_true, y_pred):
     return f1_val
 
 # Load the saved model
-loaded_model = load_model("model.h5", custom_objects={'customized_f1_score': custom_f1_score})
+loaded_model = load_model("model.h5", custom_objects={'custom_f1_score': custom_f1_score})
 
 # Define the list of classes
 classes = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
@@ -29,35 +29,41 @@ class CustomerSatisfactionApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Customer Satisfaction Recognition")
-        
-        self.root.configure(bg="#2e2e2e")
+        self.root.geometry("1200x800")  # Set window size
 
-        title_label = Label(root, text="Customer Satisfaction Recognition", font=("Helvetica", 20, "bold"), fg="white", bg="#2e2e2e")
-        title_label.pack(pady=10)
+        # Load background image
+        self.bg_image = Image.open("smileys-5776137_1280.jpg")
+        self.bg_image = self.bg_image.resize((1200, 800), Image.LANCZOS)
+        self.bg_image = ImageTk.PhotoImage(self.bg_image)
 
-        self.video_frame = Frame(root, bg="#2e2e2e")
-        self.video_frame.pack()
+        self.background_label = Label(root, image=self.bg_image)
+        self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-        self.video_label = Label(self.video_frame, bg="#2e2e2e")
-        self.video_label.grid(row=0, column=0, padx=10, pady=10)
+        # Load company logo
+        self.logo_image = Image.open("5803416.jpg")
+        self.logo_image = self.logo_image.resize((150, 150), Image.LANCZOS)
+        self.logo_image = ImageTk.PhotoImage(self.logo_image)
 
-        self.emotion_frame = Frame(root, bg="#2e2e2e")
-        self.emotion_frame.pack(pady=10)
+        self.logo_label = Label(root, image=self.logo_image, bg="white")
+        self.logo_label.place(x=10, y=10)
+
+        title_label = Label(root, text="Customer Satisfaction Recognition", font=("Helvetica", 24, "bold"), fg="black", bg="white")
+        title_label.place(x=180, y=30)
+
+        self.video_label = Label(root, bg="white")
+        self.video_label.place(x=10, y=180, width=580, height=400)
 
         self.emotion_labels = {}
         for idx, emotion in enumerate(classes):
-            label = Label(self.emotion_frame, text=f"{emotion}: 0", font=("Helvetica", 14), fg="white", bg="#2e2e2e")
-            label.grid(row=idx // 2, column=idx % 2, padx=10, pady=5, sticky="w")
+            label = Label(root, text=f"{emotion}: 0", font=("Helvetica", 16), fg="black", bg="white")
+            label.place(x=620, y=180 + idx*40)
             self.emotion_labels[emotion] = label
 
-        button_frame = Frame(root, bg="#2e2e2e")
-        button_frame.pack(pady=10)
+        self.start_button = Button(root, text="Start", command=self.start_video, font=("Helvetica", 16), bg="#4CAF50", fg="white", padx=20, pady=10)
+        self.start_button.place(x=620, y=480, width=120)
 
-        self.start_button = Button(button_frame, text="Start", command=self.start_video, font=("Helvetica", 14), bg="#4CAF50", fg="white", padx=20, pady=5)
-        self.start_button.grid(row=0, column=0, padx=10)
-
-        self.stop_button = Button(button_frame, text="Stop", command=self.stop_video, font=("Helvetica", 14), bg="#f44336", fg="white", padx=20, pady=5)
-        self.stop_button.grid(row=0, column=1, padx=10)
+        self.stop_button = Button(root, text="Stop", command=self.stop_video, font=("Helvetica", 16), bg="#f44336", fg="white", padx=20, pady=10)
+        self.stop_button.place(x=760, y=480, width=120)
 
         self.cap = None
         self.running = False

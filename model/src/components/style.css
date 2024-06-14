@@ -1,0 +1,165 @@
+/* styles.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    background-color: #92E3A9;
+    color: #003b20;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .footer {
+    background-color: #92E3A9;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .home {
+    padding: 20px;
+    text-align: center;
+  }
+  /* styles.css */
+
+/* Other styles */
+
+.content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .left {
+    width: 50%;
+    padding-right: 20px;
+  }
+  
+  .right {
+    width: 50%;
+  }
+  .right img{
+    width: 65%;
+  }
+  .feedback {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+   
+  }
+  
+  .feedback h3 {
+    margin-bottom: 10px;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #92E3A9;
+    color: rgb(11, 94, 0);
+  }
+  
+  .logo img {
+    width: 100px; /* Adjust the width of the logo as needed */
+  }
+  
+  .nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  .nav a {
+    color: #003b20;
+    text-decoration: none;
+  }
+  
+  .history-link a {
+    color: #003b20;
+    text-decoration: none;
+  }
+  .camera-container {
+    width: 360px; /* Set the width of the camera container */
+    height: 270px; /* Set the height of the camera container */
+    border: 2px solid #333; /* Add a border to the container */
+    border-radius: 8px; /* Add border-radius for rounded corners */
+    overflow: hidden; /* Hide overflow content */
+    align-self: center;
+    margin-left: 130px;
+  }
+  
+  .camera-container video {
+    width: 100%; /* Make the video fill the container */
+    height: 100%; /* Make the video fill the container */
+  }
+
+  .App-header {
+    background-color: #282c34;
+    padding: 20px;
+    color: white;
+    text-align: center;
+  }
+  
+  .header, .footer {
+    background-color: #282c34;
+    color: white;
+    padding: 10px;
+  }
+  
+  .header .logo img {
+    height: 40px;
+  }
+  
+  .history-link a {
+    color: #61dafb;
+    text-decoration: none;
+  }
+  
+  .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+  }
+  
+  .left, .right {
+    width: 45%;
+  }
+  
+  .camera-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  button {
+    margin: 10px;
+    padding: 10px;
+    background-color: #61dafb;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #21a1f1;
+  }
+  
+  progress {
+    width: 100%;
+  }
+  
+  

@@ -40,7 +40,7 @@ class CustomerSatisfactionApp:
         self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
         # Load company logo
-        self.logo_image = Image.open("5803416.jpg")
+        self.logo_image = Image.open("moodmirror-01.png")
         self.logo_image = self.logo_image.resize((150, 150), Image.LANCZOS)
         self.logo_image = ImageTk.PhotoImage(self.logo_image)
 
